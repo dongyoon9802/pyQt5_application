@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QScrollArea, QSplitter, QFrame,  QDoubleSpinBox, QComboBox, QPushButton, QMainWindow, QWidget, QDesktopWidget, QLabel, QVBoxLayout, QLineEdit, QTabWidget
+from PyQt5.QtWidgets import QApplication, QScrollArea, QSplitter, QFrame, QGridLayout,  QDoubleSpinBox, QComboBox, QPushButton, QMainWindow, QWidget, QDesktopWidget, QLabel, QVBoxLayout, QLineEdit, QTabWidget
 from PyQt5.QtCore import QTime, Qt
 from PyQt5.QtGui import *
 
@@ -28,18 +28,16 @@ class MyApp(QWidget):
         self.show()
 
     def create_tab_1(self):
-        layout_1 = QVBoxLayout()
-
+        layout_1 = QGridLayout()
+        self.setLayout(layout_1)
         # 텍스트영역
         label1 = QLabel('종목선택', self)
-        label1.move(10, 55)
         label1.setAlignment(Qt.AlignVCenter)
         font1 = label1.font()
         font1.setBold(True)
         label1.setFont(font1)
 
         label2 = QLabel('주문방식', self)
-        label2.move(10, 100)
         label2.setAlignment(Qt.AlignVCenter)
         font2 = label2.font()
         font2.setBold(True)
@@ -52,17 +50,14 @@ class MyApp(QWidget):
         cb1.addItem('KRW-ETH')
         cb1.addItem('KRW-XRP')
         cb1.addItem('KRW-SOL')
-        cb1.move(80, 55)
 
         cb2 = QComboBox(self)
         cb2.addItem('지정가')
         cb2.addItem('시장가')
-        cb2.move(80, 100)
         # 종목설정메뉴 끝
 
         # 로스컷
         label4 = QLabel('로스컷', self)
-        label4.move(200, 55)
         label4.setAlignment(Qt.AlignVCenter)
         font4 = label4.font()
         font4.setBold(True)
@@ -72,12 +67,10 @@ class MyApp(QWidget):
         dspinbox1.setRange(0, 100)
         dspinbox1.setSingleStep(0.01)
         dspinbox1.setPrefix('% ')
-        dspinbox1.move(270, 55)
         # 로스컷 끝
 
         # 익절컷
         label5 = QLabel('익절컷', self)
-        label5.move(200, 100)
         label5.setAlignment(Qt.AlignVCenter)
         font5 = label5.font()
         font5.setBold(True)
@@ -87,12 +80,10 @@ class MyApp(QWidget):
         dspinbox2.setRange(0, 100)
         dspinbox2.setSingleStep(0.01)
         dspinbox2.setPrefix('% ')
-        dspinbox2.move(270, 100)
         # 익절컷 끝
 
         # 슬리피지
         label6 = QLabel('슬리피지', self)
-        #label6.move(200, 145)
         label6.setAlignment(Qt.AlignVCenter)
         font6 = label6.font()
         font6.setBold(True)
@@ -103,21 +94,20 @@ class MyApp(QWidget):
         dspinbox3.setRange(0, 100)
         dspinbox3.setSingleStep(0.01)
         dspinbox3.setPrefix('% ')
-        #dspinbox3.move(270, 145)
         dspinbox3.setToolTip('신호발생 이후 몇 % 이상 높은 가격까지 주문을 허용할 것인지 설정')
         # 슬리피지 끝
 
         # widget 생성
-        layout_1.addWidget(label1)
-        layout_1.addWidget(label2)
-        layout_1.addWidget(cb1)
-        layout_1.addWidget(cb2)
-        layout_1.addWidget(label4)  # 로스컷( %)
-        layout_1.addWidget(label5)  # 익절컷( %)
-        layout_1.addWidget(label6)  # 슬리피지( %)
-        layout_1.addWidget(dspinbox1)
-        layout_1.addWidget(dspinbox2)
-        layout_1.addWidget(dspinbox3)
+        layout_1.addWidget(label1, 0, 0)
+        layout_1.addWidget(label2, 1, 0)
+        layout_1.addWidget(cb1, 0, 1)
+        layout_1.addWidget(cb2, 1, 1)
+        layout_1.addWidget(label4, 0, 2)  # 로스컷( %)
+        layout_1.addWidget(label5, 1, 2)  # 익절컷( %)
+        layout_1.addWidget(label6, 2, 2)  # 슬리피지( %)
+        layout_1.addWidget(dspinbox1, 0, 3)
+        layout_1.addWidget(dspinbox2, 1, 3)
+        layout_1.addWidget(dspinbox3, 2, 3)
         # widget 생성 끝
         widget = QWidget()
         widget.setLayout(layout_1)
